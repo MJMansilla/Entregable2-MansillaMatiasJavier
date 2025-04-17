@@ -3,45 +3,199 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Carrito de Compras - Instrumentos Musicales</title>
+    <title>La Casa de la Musica - Instrumentos Musicales</title>
     <link rel="stylesheet" href="CSS/styles.css" />
   </head>
   <body>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="logo"
+          ><img src="./Assets/Logo/Logo.png" alt="Logo"
+        /></a>
+        <ul class="nav-menu">
+          <li><a href="#inicioSesion">Iniciar Sesion</a></li>
+          <li><a href="#productos">Productos</a></li>
+          <li><a href="#carrito">Carrito</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+    </nav>
     <header>
-      <h1>Carrito de Compras - Instrumentos Musicales</h1>
-      <p>Elige tus instrumentos favoritos.</p>
+      <h1>La Casa de la Música - Instrumentos Musicales</h1>
+      <p>Envios a todo el Pais</p>
     </header>
     <main>
-      <section class="info-section">
-        <h2>¿Qué es este simulador?</h2>
-        <p>
-          Este simulador te permite crear un carrito de compras con tus
-          instrumentos musicales preferidos, calcular el total y confirmar tu
-          compra.
-        </p>
+      <!-- Sección de productos -->
+      <section id="productos" class="cards-section">
+        <h2>Instrumentos en Stock</h2>
+        <div class="cards-container">
+          <!-- Card: Guitarra -->
+          <div class="card" data-instrumento="guitarra">
+            <img src="./Assets/Cards/Guitarra.webp" alt="Guitarra" />
+            <div class="card-content">
+              <h3>Guitarra</h3>
+              <p class="description">Una guitarra eléctrica de alta calidad.</p>
+              <p class="price">$1500 USD</p>
+              <input
+                type="number"
+                min="1"
+                placeholder="Cantidad"
+                class="cantidad-input"
+              />
+              <button class="btnAgregar">Agregar al Carrito</button>
+            </div>
+          </div>
+
+          <!-- Card: Piano -->
+          <div class="card" data-instrumento="piano">
+            <img src="./Assets/Cards/Piano.webp" alt="Piano" />
+            <div class="card-content">
+              <h3>Piano</h3>
+              <p class="description">Teclado clásico para el alma musical.</p>
+              <p class="price">$5000 USD</p>
+              <input
+                type="number"
+                min="1"
+                placeholder="Cantidad"
+                class="cantidad-input"
+              />
+              <button class="btnAgregar">Agregar al Carrito</button>
+            </div>
+          </div>
+
+          <!-- Card: Batería -->
+          <div class="card" data-instrumento="bateria">
+            <img src="./Assets/Cards/Bateria.webp" alt="Batería" />
+            <div class="card-content">
+              <h3>Batería</h3>
+              <p class="description">
+                Batería profesional para ritmos explosivos.
+              </p>
+              <p class="price">$3000 USD</p>
+              <input
+                type="number"
+                min="1"
+                placeholder="Cantidad"
+                class="cantidad-input"
+              />
+              <button class="btnAgregar">Agregar al Carrito</button>
+            </div>
+          </div>
+
+          <!-- Card: Violín -->
+          <div class="card" data-instrumento="violin">
+            <img src="./Assets/Cards/Violin.webp" alt="Violín" />
+            <div class="card-content">
+              <h3>Violín</h3>
+              <p class="description">
+                El violín perfecto para melodías clásicas.
+              </p>
+              <p class="price">$2000 USD</p>
+              <input
+                type="number"
+                min="1"
+                placeholder="Cantidad"
+                class="cantidad-input"
+              />
+              <button class="btnAgregar">Agregar al Carrito</button>
+            </div>
+          </div>
+
+          <!-- Card: Flauta -->
+          <div class="card" data-instrumento="flauta">
+            <img src="./Assets/Cards/Flauta.webp" alt="Flauta" />
+            <div class="card-content">
+              <h3>Flauta</h3>
+              <p class="description">
+                Flauta dulce y elegante para armonías suaves.
+              </p>
+              <p class="price">$800 USD</p>
+              <input
+                type="number"
+                min="1"
+                placeholder="Cantidad"
+                class="cantidad-input"
+              />
+              <button class="btnAgregar">Agregar al Carrito</button>
+            </div>
+          </div>
+
+          <!-- Card: Saxofón -->
+          <div class="card" data-instrumento="saxofon">
+            <img src="./Assets/Cards/Saxofon.webp" alt="Saxofón" />
+            <div class="card-content">
+              <h3>Saxofón</h3>
+              <p class="description">
+                Disfruta del jazz con este saxofón moderno.
+              </p>
+              <p class="price">$2500 USD</p>
+              <input
+                type="number"
+                min="1"
+                placeholder="Cantidad"
+                class="cantidad-input"
+              />
+              <button class="btnAgregar">Agregar al Carrito</button>
+            </div>
+          </div>
+
+          <!-- Card: Ukelele -->
+          <div class="card" data-instrumento="ukelele">
+            <img src="./Assets/Cards/Ukelele.webp" alt="Ukelele" />
+            <div class="card-content">
+              <h3>Ukelele</h3>
+              <p class="description">
+                Pequeño y vibrante, ideal para sonidos tropicales.
+              </p>
+              <p class="price">$1200 USD</p>
+              <input
+                type="number"
+                min="1"
+                placeholder="Cantidad"
+                class="cantidad-input"
+              />
+              <button class="btnAgregar">Agregar al Carrito</button>
+            </div>
+          </div>
+
+          <!-- Card: Bajo -->
+          <div class="card" data-instrumento="bajo">
+            <img src="./Assets/Cards/Bajo.webp" alt="Bajo" />
+            <div class="card-content">
+              <h3>Bajo</h3>
+              <p class="description">El bajo que da solidez a tus grooves.</p>
+              <p class="price">$1800 USD</p>
+              <input
+                type="number"
+                min="1"
+                placeholder="Cantidad"
+                class="cantidad-input"
+              />
+              <button class="btnAgregar">Agregar al Carrito</button>
+            </div>
+          </div>
+        </div>
       </section>
-      <section class="info-section">
-        <h2>Instrumentos Disponibles</h2>
-        <p>Explora nuestra selección de instrumentos musicales:</p>
-        <ul>
-          <li><strong>Guitarra:</strong> Precio: $1500 USD</li>
-          <li><strong>Piano:</strong> Precio: $5000 USD</li>
-          <li><strong>Batería:</strong> Precio: $3000 USD</li>
-          <li><strong>Violín:</strong> Precio: $2000 USD</li>
-          <li><strong>Flauta:</strong> Precio: $800 USD</li>
-          <li><strong>Saxofón:</strong> Precio: $2500 USD</li>
-          <li><strong>Ukelele:</strong> Precio: $1200 USD</li>
-          <li><strong>Bajo:</strong> Precio: $1800 USD</li>
-        </ul>
+
+      <!-- Sección del carrito de compras -->
+      <section id="carrito" class="cart-section">
+        <h2>Carrito de Compras</h2>
+        <div id="cartContent"></div>
+        <button id="btnVaciar">Vaciar Carrito</button>
       </section>
-      <section class="info-section">
-        <h2>¿Cómo funciona?</h2>
-        <p>
-          Usa la consola interactiva para seleccionar tus instrumentos, agregar
-          cantidades, calcular el total de la compra y confirmar tu pedido.
-        </p>
+
+      <!-- Operaciones: Calcular total y confirmar compra -->
+      <section class="operations-section">
+        <button id="btnCalcular">Calcular Total</button>
+        <button id="btnConfirmar">Confirmar Compra</button>
+        <div id="totalDisplay"></div>
+        <div id="message"></div>
       </section>
     </main>
+    <footer>
+      <p>&copy; 2025 La Casa de la Música. Todos los derechos reservados.</p>
+    </footer>
+
     <script src="JS/carrito.js" defer></script>
   </body>
 </html>

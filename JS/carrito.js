@@ -1,105 +1,137 @@
-const carrito = [];
-const precios = {
-  guitarra: 1500,
-  piano: 5000,
-  bateria: 3000,
-  violin: 2000,
-  flauta: 800,
-  saxofon: 2500,
-  ukelele: 1200,
-  bajo: 1800,
-};
-console.log("Precios disponibles: ", precios);
+document.addEventListener("DOMContentLoaded", () => {
+  // Recuperar el carrito desde localStorage o crearlo vacío
+  let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-function agregarInstrumento() {
-  let instrumento = prompt(
-    `Ingresa un instrumento:
-    guitarra, piano, bateria, violin, flauta, saxofon, ukulele, bajo`
-  );
-  if (precios[instrumento]) {
-    let cantidad = prompt(
-      `¿Cuántas unidades de ${instrumento} deseas agregar?`
-    );
-    if (cantidad > 0) {
-      carrito.push({ instrumento, cantidad });
-      alert(`Se agregaron ${cantidad} unidades de ${instrumento} al carrito.`);
+  const precios = {
+    guitarra: 1500,
+    piano: 5000,
+    bateria: 3000,
+    violin: 2000,
+    flauta: 800,
+    saxofon: 2500,
+    ukelele: 1200,
+    bajo: 1800,
+  };
+
+  // Función para actualizar el localStorage
+  function updateLocalStorage() {
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+  }
+
+  // Función para renderizar el carrito en el DOM
+  function renderCarrito() {
+    const cartContent = document.getElementById("cartContent");
+    if (carrito.length === 0) {
+      cartContent.innerHTML = "<p>El carrito está vacío.</p>";
     } else {
-      alert("Cantidad no válida. Inténtalo nuevamente.");
+      let html = "<ul>";
+      carrito.forEach((item) => {
+        html += `<li>${item.cantidad} x ${item.instrumento} (Precio $${
+          precios[item.instrumento]
+        })</li>`;
+      });
+      html += "</ul>";
+      cartContent.innerHTML = html;
     }
-  } else {
-    alert("Instrumento no válido. Inténtalo nuevamente.");
   }
-}
 
-function calcularTotal() {
-  let total = 0;
-  carrito.forEach((item) => {
-    total += precios[item.instrumento] * item.cantidad;
-  });
-  console.log("Total calculado: $", total);
-  alert(`El total de tu carrito es: $${total}.`);
-  return total;
-}
-
-function mostrarCarrito() {
-  if (carrito.length === 0) {
-    alert("El carrito está vacío.");
-  } else {
-    let mensaje = "Contenido del carrito:";
+  // Función para calcular y mostrar el total en el DOM
+  function calcularTotal() {
+    let total = 0;
     carrito.forEach((item) => {
-      mensaje += `- ${item.cantidad} x ${item.instrumento} (Precio unitario: $${
-        precios[item.instrumento]
-      })`;
+      total += precios[item.instrumento] * item.cantidad;
     });
-    alert(mensaje);
+    document.getElementById(
+      "totalDisplay"
+    ).innerHTML = `<h3>Total: $${total}</h3>`;
+    return total;
   }
-}
 
-function confirmarCompra() {
-  let total = calcularTotal();
-  let confirmar = confirm(
-    `El total es $${total}. ¿Deseas confirmar tu compra?`
-  );
-  if (confirmar) {
-    alert("¡Compra realizada con éxito!");
-    carrito.length = 0;
-  } else {
-    console.log("Compra cancelada.");
-    alert("Compra cancelada.");
-  }
-}
+  // Manejador para agregar un producto al carrito desde las cards
+  const btnsAgregar = document.querySelectorAll(".btnAgregar");
+  btnsAgregar.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      // Se identifica la card padre y se obtiene el instrumento a agregar
+      const card = btn.closest(".card");
+      const instrumento = card.getAttribute("data-instrumento");
 
-function iniciarSimulador() {
-  let opcion;
-  do {
-    opcion = prompt(
-      `Selecciona una opción:
-      1. Agregar instrumento
-      2. Ver total
-      3. Ver carrito
-      4. Confirmar compra
-      5. Salir`
-    );
-    switch (opcion) {
-      case "1":
-        agregarInstrumento();
-        break;
-      case "2":
-        calcularTotal();
-        break;
-      case "3":
-        mostrarCarrito();
-        break;
-      case "4":
-        confirmarCompra();
-        break;
-      case "5":
-        alert("¡Gracias por usar el simulador de carrito de compras!");
-        break;
-      default:
-        alert("Opción no válida. Inténtalo nuevamente.");
+      // Se obtiene la cantidad elegida en la tarjeta
+      const cantidadInput = card.querySelector(".cantidad-input");
+      const cantidad = parseInt(cantidadInput.value);
+
+      const messageDiv = document.getElementById("message");
+
+      // Validación de cantidad
+      if (!cantidad || cantidad <= 0) {
+        messageDiv.textContent =
+          "Por favor, ingresa una cantidad válida para " + instrumento + ".";
+        return;
+      }
+
+      // Agregar la compra al carrito
+      carrito.push({ instrumento, cantidad });
+      updateLocalStorage();
+      renderCarrito();
+      messageDiv.textContent = `Se agregaron ${cantidad} unidades de ${instrumento} al carrito.`;
+
+      // Limpiar el input de cantidad
+      cantidadInput.value = "";
+    });
+  });
+
+  // Boton para calcular el total
+  const btnCalcular = document.getElementById("btnCalcular");
+  btnCalcular.addEventListener("click", () => {
+    calcularTotal();
+  });
+
+  //Boton para vaciar el carrito
+  const btnVaciar = document.getElementById("btnVaciar");
+  btnVaciar.addEventListener("click", () => {
+    carrito = [];
+    updateLocalStorage();
+    renderCarrito();
+    document.getElementById("totalDisplay").innerHTML = "";
+    document.getElementById("message").textContent =
+      "El carrito ha sido vaciado.";
+  });
+
+  // Boton para confirmar la compra
+  const btnConfirmar = document.getElementById("btnConfirmar");
+  btnConfirmar.addEventListener("click", () => {
+    const total = calcularTotal();
+    const messageDiv = document.getElementById("message");
+
+    if (total === 0) {
+      messageDiv.textContent =
+        "No hay productos en el carrito para confirmar la compra.";
+      return;
     }
-  } while (opcion !== "5");
-}
 
-iniciarSimulador();
+    //Confirmación de la compra usando el DOM
+    const confirmacion = document.createElement("div");
+    confirmacion.innerHTML = `
+      <p>El total es $${total}. ¿Deseas confirmar tu compra?</p>
+      <button id="btnSi">Sí</button>
+      <button id="btnNo">No</button>
+    `;
+    messageDiv.innerHTML = "";
+    messageDiv.appendChild(confirmacion);
+
+    document.getElementById("btnSi").addEventListener("click", () => {
+      messageDiv.textContent = "¡Compra realizada con éxito!";
+      carrito = [];
+      updateLocalStorage();
+      renderCarrito();
+      document.getElementById("totalDisplay").innerHTML = "";
+    });
+
+    document.getElementById("btnNo").addEventListener("click", () => {
+      messageDiv.textContent = "Compra cancelada.";
+      confirmacion.remove();
+    });
+  });
+
+  // Renderiza el carrito al cargar la página
+  renderCarrito();
+});
