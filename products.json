@@ -1,0 +1,58 @@
+[
+  {
+    "instrumento": "guitarra",
+    "nombre": "Guitarra",
+    "descripcion": "Una guitarra eléctrica de alta calidad.",
+    "precio": 1500,
+    "imagen": "./Assets/Cards/Guitarra.webp"
+  },
+  {
+    "instrumento": "piano",
+    "nombre": "Piano",
+    "descripcion": "Teclado clásico para el alma musical.",
+    "precio": 5000,
+    "imagen": "./Assets/Cards/Piano.webp"
+  },
+  {
+    "instrumento": "bateria",
+    "nombre": "Batería",
+    "descripcion": "Batería profesional para ritmos explosivos.",
+    "precio": 3000,
+    "imagen": "./Assets/Cards/Bateria.webp"
+  },
+  {
+    "instrumento": "violin",
+    "nombre": "Violín",
+    "descripcion": "El violín perfecto para melodías clásicas.",
+    "precio": 2000,
+    "imagen": "./Assets/Cards/Violin.webp"
+  },
+  {
+    "instrumento": "flauta",
+    "nombre": "Flauta",
+    "descripcion": "Flauta dulce y elegante para armonías suaves.",
+    "precio": 800,
+    "imagen": "./Assets/Cards/Flauta.webp"
+  },
+  {
+    "instrumento": "saxofon",
+    "nombre": "Saxofón",
+    "descripcion": "Disfruta del jazz con este saxofón moderno.",
+    "precio": 2500,
+    "imagen": "./Assets/Cards/Saxofon.webp"
+  },
+  {
+    "instrumento": "ukelele",
+    "nombre": "Ukelele",
+    "descripcion": "Pequeño y vibrante, ideal para sonidos tropicales.",
+    "precio": 1200,
+    "imagen": "./Assets/Cards/Ukelele.webp"
+  },
+  {
+    "instrumento": "bajo",
+    "nombre": "Bajo",
+    "descripcion": "El bajo que da solidez a tus grooves.",
+    "precio": 1800,
+    "imagen": "./Assets/Cards/Bajo.webp"
+  }
+]
